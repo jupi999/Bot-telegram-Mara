@@ -1,0 +1,6 @@
+yaml
+services:
+  - type: web
+    name: bot-telegram-mara
+    env: python
+    startCommand: bash start.sh
