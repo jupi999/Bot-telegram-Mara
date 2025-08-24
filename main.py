@@ -12,7 +12,7 @@ logging.basicConfig(
 )
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Salut ! Je suis ton bot intelligent. Envoie-moi un message !")
+    await update.message.reply_text("Salut! Je suis ton bot intelligent. Envoie-moi un message!")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_text = update.message.text
@@ -22,9 +22,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             messages=[{"role": "user", "content": user_text}],
             max_tokens=150,
             temperature=0.7
-        )
+)
         reply = response.choices[0].message.content.strip()
-    except Exception:reply = "Désolé, je ne peux pas répondre maintenant."
+    except Exception as e:
+        logging.error(f"Erreur OpenAI: {e}")
+        reply = "Désolé, je ne peux pas répondre maintenant."
     await update.message.reply_text(reply)
 
 def main():
