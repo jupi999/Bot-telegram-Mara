@@ -1,4 +1,3 @@
-python
 import openai
 import os
 from flask import Flask, request
