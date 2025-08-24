@@ -3,8 +3,12 @@ import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 
-# Clé API via variable d’environnement
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Sélection de la clé API selon l'environnement
+env = os.getenv("ENV", "dev")  # Par défaut: "dev"
+if env == "prod":
+    openai.api_key = os.getenv("OPENAI_API_KEY_PROD")
+else:
+    openai.api_key = os.getenv("OPENAI_API_KEY_DEV")
 
 # Fonction pour interroger l'IA
 async def ask_gpt(message):
