@@ -5,11 +5,7 @@ import threading
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 
-env = os.getenv("ENV", "dev")
-if env == "prod":
-    openai.api_key = os.getenv("OPENAI_API_KEY_PROD")
-else:
-    openai.api_key = os.getenv("OPENAI_API_KEY_DEV")
+openai.api_key = "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"
 
 async def ask_gpt(message):
     response = openai.ChatCompletion.create(
